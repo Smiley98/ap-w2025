@@ -2,6 +2,7 @@
 
 int main()
 {
-	printf("Hello world!");
+	printf("C style hello\n");
+	std::cout << "C++ style hello" << std::endl;
 	return 0;
 }
