@@ -2,6 +2,27 @@
 
 const int PLAYER_COUNT = 5;
 
+// Encapsulation is generally bad. It leads to useless functions such as SetRadius that should instead be public variables
+class Circle1
+{
+public:
+	float GetArea() { return radius * 3.14f; }
+
+	float GetRadius() { return radius; }		// <-- Shouldn't exist
+	void SetRadius(float r) { radius = r; }		// <-- Shouldn't exist
+
+private:
+	float radius = 0.0f;
+};
+
+// Superior Procedural programming Circle implementation ;)
+struct Circle2
+{
+	float radius;
+};
+
+float Area(Circle2 circle) { return circle.radius * 3.14f; }
+
 // Just like Vector2 in Unity-C#
 // Note the use of " = 0". This means whenever we create a Vector2, its x & y values will be 0.
 struct Vector2
@@ -33,6 +54,10 @@ void ProceduralExample()
 		HealPlayer(playerHealths[i]);
 		printf("Player x coordinate: %f\n", playerPositions[i].x);
 	}
+
+	Circle2 circle;
+	circle.radius = 5.0f;
+	printf("Circle with a radius %f has an area is %f\n", circle.radius, Area(circle));
 }
 
 class Player
@@ -54,10 +79,14 @@ void ObjectOrientedExample()
 		players[i].Heal();
 		players[i].Move();
 	}
+
+	Circle1 circle;
+	circle.SetRadius(5.0f);
+	printf("Circle with a radius %f has an area is %f\n", circle.GetRadius(), circle.GetArea());
 }
 
 // Program that moves and heals 5 players:
-// TODO - Modify program to use dynamic memory to pass in player count
+// TODO Week 3 -- Constructors, Destructors, Pointers
 int main()
 {
 	ProceduralExample();
