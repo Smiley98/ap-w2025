@@ -1,4 +1,5 @@
 #include <iostream>
+#include <random>
 
 const int PLAYER_COUNT = 5;
 
@@ -85,12 +86,46 @@ void ObjectOrientedExample()
 	printf("Circle with a radius %f has an area is %f\n", circle.GetRadius(), circle.GetArea());
 }
 
+// Stack memory is managed by the compiler (it cleans up our memory for us)
+void StackExample()
+{
+	int number = 69;
+	int numbers[] = { 420, 1337 };
+	// Once this StackExample() function exits, the compiler destroys the memory to store 69, 420, and 1337
+}
+
+// Heap memory is managed by the programmer (we have to clean it up our selves)
+void HeapExample()
+{
+	int* number = new int; // <-- "scalar-new"
+	printf("Allocated one integer\n");
+
+	delete number;			// <-- "scalar-delete"
+	printf("Deallocated one integer\n");
+
+	// Generates a random number between 1 and 10
+	int numberCount = 1 + rand() % 10;
+
+	// <-- I'll explain the '*' next class
+	int* numbers = new int[numberCount];			// <-- "array-new"
+	printf("Allocated %i integers\n", numberCount);
+
+	delete[] numbers;								// <-- "array-delete"
+	printf("Deallocated %i integers\n", numberCount);
+}
+
 // Program that moves and heals 5 players:
 // TODO Week 3 -- Constructors, Destructors, Pointers
 int main()
 {
+	// "Seeds" our random generator so we get different random numbers each time we run our program.
+	srand(time(0));
+
 	ProceduralExample();
 	ObjectOrientedExample();
+
+	StackExample();
+	HeapExample();
 
 	// Note on memory:
 	// C++ does NOT initialize variables, meaning if we do int numbers[3];
