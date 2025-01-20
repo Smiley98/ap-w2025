@@ -89,6 +89,11 @@ void ObjectOrientedExample()
 // Stack memory is managed by the compiler (it cleans up our memory for us)
 void StackExample()
 {
+	// We don't have more than 1 megabyte worth of stack memory by default.
+	// Its not a good idea to make large stack allocations!
+	//const int pixelCount = 1920 * 1080;
+	//int pixels[pixelCount];
+
 	int number = 69;
 	int numbers[] = { 420, 1337 };
 	// Once this StackExample() function exits, the compiler destroys the memory to store 69, 420, and 1337
