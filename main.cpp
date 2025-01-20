@@ -40,6 +40,16 @@ void ArrayExample()
 	// Should still prefer operator[] over pointer arithmetic, but its good to know!
 	for (int i = 0; i < 10; i++)
 		printf("Number %i: %i\n", i + 1, *(numbers + i));
+
+	// Not required, but setting a deleted pointer to nullptr signifies that its been deallocated.
+	delete[] numbers;
+	numbers = nullptr;
+
+	// Setting to nullptr prevents the "double-delete" bug where deleting deallocated but non-null memory crashes the program.
+	// (I generally don't like setting to nullptr because I WANT to know if I'm accidentally calling delete[] twice+).
+	delete[] numbers;
+	delete[] numbers;
+	delete[] numbers;
 }
 
 int main()
