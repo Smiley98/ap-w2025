@@ -22,16 +22,29 @@ void PointerExample()
 	//printf("%i", *brokenAddress);
 }
 
-int main()
+void ArrayExample()
 {
-	PointerExample();
-
 	// Arrays are represented as a pointer to the first address.
 	// From there, we can offset based on the size of our array (why numbers[0] means first number)!
 	int* numbers = new int[10];
 	for (int i = 0; i < 10; i++)
-	{
 		numbers[i] = i + 1;
-	}
+
+	// Since arrays are stored as a pointer to the address of the start of the array,
+	// we can access the array values via pointer arithmetic!
+	*(numbers + 0) = 69;	// "Changing numbers[0]"
+	*(numbers + 1) = 420;	// "Changing numbers[1]"
+	*(numbers + 2) = 1337;	// "Changing numbers[2]"
+	*(numbers + 3) = 21;	// "Changing numbers[3]"
+
+	// Should still prefer operator[] over pointer arithmetic, but its good to know!
+	for (int i = 0; i < 10; i++)
+		printf("Number %i: %i\n", i + 1, *(numbers + i));
+}
+
+int main()
+{
+	PointerExample();
+	ArrayExample();
 	return 0;
 }
