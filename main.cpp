@@ -7,8 +7,19 @@ void PointerExample()
 	int* numberAddress = &number; // '&' means "Address of" --> where the variable is stored in memory.
 	printf("Value of number: %i\nAddress of number: %p\n", number, numberAddress);
 
+	*numberAddress = 69;
+	printf("New value of number: %i\nSame address of number: %p\n", number, numberAddress);
+
 	// "Memory corruption" --> The compiler owns numberAddress, so by deleting it ourselves we break the rules (and our program crashes)!
 	//delete numberAddress;
+
+	// Generally you don't want to treat integers as addresses.
+	// This is because they probably DON'T map to actual addresses.
+	// Modifying an address that has NOT been allocated by YOUR program will result in memory corruption (crash)!
+	//int* brokenAddress = (int*)number;
+	//*brokenAddress = 69420;
+	//printf("%p", brokenAddress);
+	//printf("%i", *brokenAddress);
 }
 
 int main()
